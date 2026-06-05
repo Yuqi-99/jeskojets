@@ -7,30 +7,27 @@ export const Header = () => {
 	];
 
 	return (
-		<header className='fixed inset-x-0 top-0 z-50 px-4 py-4 sm:px-6 lg:px-10'>
-			<div className='mx-auto flex max-w-640 items-center justify-between gap-3 text-xs leading-none font-extrabold text-white lg:text-sm'>
-				<div className='hidden items-center gap-1 p-1 md:flex'>
+		<header className='fixed inset-x-0 top-0 z-50 px-4 py-4 sm:px-6 lg:px-16'>
+			<div className='mx-auto flex max-w-640 items-center justify-between gap-3 text-xs font-bold text-white lg:text-sm'>
+				<div className='hidden items-center gap-5 p-1 md:flex'>
 					{links.map((link) => (
 						<a
 							key={link.href}
 							href={link.href}
-							className='rounded-full px-4 py-3 transition hover:bg-white/70'
+							className='rounded-lg p-1 transition hover:bg-white/15'
 						>
 							{link.label}
 						</a>
 					))}
 				</div>
 
-				<div className='flex items-center gap-1 p-1'>
-					<a
-						href='tel:+971544325050'
-						className='rounded-full px-3 py-3 transition hover:bg-white/70 sm:px-4'
-					>
+				<div className='flex items-center gap-5 p-1'>
+					<a href='tel:+971544325050' className='rounded-lg p-1 transition hover:bg-white/15'>
 						+971 54 432 5050
 					</a>
 					<a
 						href='mailto:info@jeskojets.com'
-						className='hidden rounded-full px-4 py-3 transition hover:bg-white/70 sm:block'
+						className='hidden rounded-lg p-1 transition hover:bg-white/15 sm:block'
 					>
 						info@jeskojets.com
 					</a>

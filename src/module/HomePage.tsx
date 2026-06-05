@@ -55,7 +55,7 @@ export const HomePage = () => {
 						</div>
 					</div>
 
-					<div className='absolute top-[47.4%] left-1/2 z-2 -translate-x-1/2 -translate-y-1/2 text-[2.25rem] leading-none font-light tracking-tight text-white/95 sm:text-[3rem] md:text-[4rem]'>
+					<div className='absolute top-[47.4%] left-1/2 z-2 w-full -translate-x-1/2 -translate-y-1/2 text-center text-[2.25rem] leading-none font-normal tracking-tight text-white/95 sm:text-[3rem] md:text-[4rem]'>
 						Jesko Jets
 					</div>
 
@@ -78,7 +78,7 @@ export const HomePage = () => {
 			</div>
 
 			<motion.h1
-				className='absolute top-[15%] left-[10%] z-20 max-w-[min(34rem,72vw)] text-[3rem] leading-[0.875] font-medium tracking-[-0.065em] text-white sm:top-[17.5%] sm:left-[6.55%] sm:text-[4rem] md:text-[5.25rem] 2xl:text-[6.75rem]'
+				className='absolute top-[20%] left-[10%] z-20 max-w-[min(45rem,86vw)] text-[3rem] leading-[0.9] font-medium tracking-[-0.08em] text-white sm:left-[6.55%] sm:text-[4rem] md:text-[clamp(4.5rem,5vw,6.75rem)] md:leading-[0.9] lg:top-[17.5%] lg:leading-[0.88889]'
 				initial={{ opacity: 0, x: -34 }}
 				animate={{ opacity: 1, x: 0 }}
 				transition={{ duration: 0.85, delay: 0.18, ease: 'easeOut' }}
@@ -88,9 +88,9 @@ export const HomePage = () => {
 				movement
 			</motion.h1>
 
-			<div className='absolute right-[10%] bottom-32 z-20 flex max-w-[min(34rem,72vw)] flex-col items-end gap-3 md:right-[6.55%] 2xl:bottom-10'>
+			<div className='absolute right-[10%] bottom-[20%] z-20 flex max-w-[min(45rem,86vw)] flex-col items-end gap-3 md:right-[6.55%] lg:bottom-12'>
 				<motion.h2
-					className='text-right text-[2.75rem] leading-[0.875] font-medium tracking-[-0.065em] text-white sm:text-[4rem] md:text-[5.25rem] 2xl:text-[6.75rem]'
+					className='max-w-[min(45rem,86vw)] text-right text-[2.75rem] leading-[0.9] font-medium tracking-[-0.08em] text-white sm:text-[4rem] md:text-[clamp(4.5rem,5vw,6.75rem)] md:leading-[0.9] lg:leading-[0.88889]'
 					initial={{ opacity: 0, x: 34 }}
 					animate={{ opacity: 1, x: 0 }}
 					transition={{ duration: 0.85, delay: 0.28, ease: 'easeOut' }}
@@ -100,16 +100,16 @@ export const HomePage = () => {
 					distinction
 				</motion.h2>
 
-				<div className='mt-6 hidden h-px w-2/3 bg-white lg:flex' />
+				<div className='mt-10 hidden h-px w-2/3 bg-white lg:flex' />
 
 				<motion.div
-					className='hidden w-full items-center justify-between text-[10px] leading-none font-semibold uppercase lg:flex lg:text-[11px]'
+					className='hidden w-full items-center justify-between text-[clamp(8px,0.694vw,10px)] leading-[1.2] font-bold tracking-[-0.032em] uppercase lg:flex'
 					initial={{ opacity: 0, y: 24 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.75, delay: 0.5, ease: 'easeOut' }}
 				>
 					<div className='flex items-center gap-1 pt-4'>
-						<img src='/arrow-bottom.gif' alt='Scroll down' className='size-6 lg:size-8' />
+						<img src='/arrow-bottom.gif' alt='Scroll down' className='size-6' />
 						<span className='font-bold'>Scroll down</span>
 					</div>
 					<div className='pt-4 text-right font-bold'>To start the journey</div>
@@ -117,12 +117,12 @@ export const HomePage = () => {
 			</div>
 
 			<motion.div
-				className='absolute bottom-32 left-[6.65%] z-20 hidden w-70 lg:block xl:w-135 2xl:bottom-10 2xl:w-120'
+				className='absolute bottom-[20%] left-[6.65%] z-20 hidden w-70 lg:bottom-20 lg:block xl:w-120'
 				initial={{ opacity: 0, y: 24 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.75, delay: 0.42, ease: 'easeOut' }}
 			>
-				<h3 className='max-w-78 text-[1.5rem] leading-[0.9] font-semibold tracking-[-0.064em] lg:text-[2rem] 2xl:text-[2.25rem]'>
+				<h3 className='max-w-[24rem] text-[clamp(16x,1.667vw,24px)] leading-none font-bold'>
 					Your
 					<br />
 					freedom to
@@ -130,24 +130,24 @@ export const HomePage = () => {
 					enjoy life
 				</h3>
 				<div className='mt-6 h-px w-8 bg-white lg:w-12' />
-				<p className='mt-7 text-[0.625rem] leading-[1.35] font-semibold lg:text-xs 2xl:text-sm'>
-					Every flight is designed around your comfort, time, and ambitions -- so you can focus on
+				<p className='mt-7 text-[clamp(10px,0.833vw,11px)] font-bold'>
+					Every flight is designed around your comfort, time, and ambitions — so you can focus on
 					what truly matters, while we take care of everything else.
 				</p>
 			</motion.div>
 
 			<motion.div
-				className='absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 rounded-full bg-white/10 p-2 shadow-[0_16px_42px_rgba(0,0,0,0.28)] sm:bottom-[5.2%]'
+				className='absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 rounded-full bg-white/10 p-1.5 shadow-[0_16px_42px_rgba(0,0,0,0.28)] sm:bottom-8'
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.65, delay: 0.6, ease: 'easeOut' }}
 			>
-				<button className='text-textdark rounded-full bg-white px-6 py-4'>
-					<p className='text-xs leading-none font-bold lg:text-sm'>Book the Flight</p>
+				<button className='text-textdark rounded-full bg-white px-6 py-3'>
+					<p className='text-xs leading-none font-bold'>Book the Flight</p>
 				</button>
 				<button
 					aria-label='Open booking form'
-					className='flex size-12 items-center justify-center rounded-full bg-white'
+					className='flex size-10 items-center justify-center rounded-full bg-white'
 				>
 					<MdFlightTakeoff className='text-textdark text-2xl' />
 				</button>
