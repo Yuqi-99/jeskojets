@@ -1,8 +1,13 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
 	font-family:
-		Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Inter,
+		ui-sans-serif,
+		system-ui,
+		-apple-system,
+		BlinkMacSystemFont,
+		'Segoe UI',
 		sans-serif;
 	color: #1d1b18;
 	background: #f4f1ea;
@@ -10,6 +15,21 @@
 	text-rendering: geometricPrecision;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+	--mainlight: #fff8ed;
+	--maindark: #312726;
+	--textdark: #201b16;
+}
+
+@theme inline {
+	--color-mainlight: var(--mainlight);
+	--color-maindark: var(--maindark);
+	--color-textdark: var(--textdark);
+
+	--z-index-modal-overlay: 100;
+	--z-index-modal: 200;
+	--z-index-modal-content: 300;
+	--z-index-loading: 3000;
 }
 
 * {
@@ -49,16 +69,48 @@ a {
 	background: #1d1b18;
 }
 
-.hero-cloud {
-	animation: hero-cloud-drift 14s ease-in-out infinite alternate;
+.hero-cloud-track {
+	width: max-content;
+	animation: hero-cloud-drift 10s linear infinite;
+	will-change: transform;
+}
+
+.hero-cloud-tile {
+	width: 90vw;
+	height: 100%;
+	flex: 0 0 auto;
+	margin-right: -24vw;
+	object-fit: cover;
+	object-position: center;
+	-webkit-mask-image: linear-gradient(
+		90deg,
+		transparent 0%,
+		black 18%,
+		black 82%,
+		transparent 100%
+	);
+	mask-image: linear-gradient(90deg, transparent 0%, black 18%, black 82%, transparent 100%);
 }
 
 @keyframes hero-cloud-drift {
 	from {
-		transform: translate3d(-5%, 0, 0) scale(1);
+		transform: translate3d(0, 0, 0);
 	}
 
 	to {
-		transform: translate3d(8%, -4%, 0) scale(1.08);
+		transform: translate3d(-66vw, 0, 0);
+	}
+}
+
+@media (min-width: 768px) {
+	.hero-cloud-tile {
+		width: 2304px;
+		margin-right: -614px;
+	}
+
+	@keyframes hero-cloud-drift {
+		to {
+			transform: translate3d(-1690px, 0, 0);
+		}
 	}
 }

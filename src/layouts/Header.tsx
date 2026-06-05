@@ -8,7 +8,7 @@ export const Header = () => {
 
 	return (
 		<header className='fixed inset-x-0 top-0 z-50 px-4 py-4 sm:px-6 lg:px-10'>
-			<div className='mx-auto flex max-w-640 items-center justify-between gap-3 text-xl leading-none font-bold'>
+			<div className='mx-auto flex max-w-640 items-center justify-between gap-3 text-xs leading-none font-extrabold text-white lg:text-sm'>
 				<div className='hidden items-center gap-1 p-1 md:flex'>
 					{links.map((link) => (
 						<a
