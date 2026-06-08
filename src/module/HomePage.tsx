@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { MdFlightTakeoff } from 'react-icons/md';
+import { useEffect, useRef, useState } from 'react';
 
 const heroDesign = {
 	width: 2560,
@@ -15,9 +14,18 @@ const getHeroScale = () => {
 	return Math.max(window.innerWidth / heroDesign.width, window.innerHeight / heroDesign.height);
 };
 
+const getViewportHeight = () => {
+	if (typeof window === 'undefined') {
+		return heroDesign.height;
+	}
+
+	return window.innerHeight;
+};
+
 export const HomePage = () => {
 	const heroRef = useRef<HTMLElement>(null);
 	const [heroScale, setHeroScale] = useState(getHeroScale);
+	const [viewportHeight, setViewportHeight] = useState(getViewportHeight);
 	const { scrollYProgress } = useScroll({
 		target: heroRef,
 		offset: ['start start', 'end end'],
@@ -45,14 +53,20 @@ export const HomePage = () => {
 	// scroll down to start the journey
 	const heroScrollX = useTransform(scrollYProgress, [0, 0.72], ['0vw', '48vw']);
 	const heroScrollY = useTransform(scrollYProgress, [0, 0.72], ['0vh', '32vh']);
-	// book flight button
-	const ctaOpacity = useTransform(scrollYProgress, [0, 0.42, 0.72], [1, 0.9, 0]);
-	const jeskoJetsOpacity = useTransform(scrollYProgress, [0, 0.58, 0.86], [1, 0.72, 0]);
-	const jeskoJetsScale = useTransform(scrollYProgress, [0, 0.86], [1, 1.35]);
-	const jeskoJetsY = useTransform(scrollYProgress, [0, 0.86], ['0vh', '-44vh']);
+
+	const jeskoJetsOpacity = useTransform(scrollYProgress, [0, 0.58, 0.86, 1], [1, 0.72, 0.9, 1]);
+	const jeskoJetsScale = useTransform(scrollYProgress, [0, 0.86, 1], [1, 1.35, 1]);
+	const jeskoJetsTop = useTransform(
+		scrollYProgress,
+		[0, 0.86, 1],
+		[viewportHeight * 0.474, viewportHeight * 0.12, 32]
+	);
 
 	useEffect(() => {
-		const updateHeroScale = () => setHeroScale(getHeroScale());
+		const updateHeroScale = () => {
+			setHeroScale(getHeroScale());
+			setViewportHeight(getViewportHeight());
+		};
 
 		updateHeroScale();
 		window.addEventListener('resize', updateHeroScale);
@@ -127,8 +141,8 @@ export const HomePage = () => {
 				</motion.div>
 
 				<motion.div
-					className='absolute top-[47.4%] left-1/2 z-4 w-full -translate-x-1/2 -translate-y-1/2 text-center text-[2.25rem] leading-none font-normal tracking-tight text-white/95 sm:text-[2rem]'
-					style={{ opacity: jeskoJetsOpacity, scale: jeskoJetsScale, y: jeskoJetsY }}
+					className='absolute left-1/2 z-4 w-full -translate-x-1/2 -translate-y-1/2 text-center text-[2.25rem] leading-none font-normal tracking-tight text-white/95 sm:text-[2rem]'
+					style={{ opacity: jeskoJetsOpacity, scale: jeskoJetsScale, top: jeskoJetsTop }}
 				>
 					Jesko Jets
 				</motion.div>
@@ -209,21 +223,6 @@ export const HomePage = () => {
 						Every flight is designed around your comfort, time, and ambitions — so you can focus on
 						what truly matters, while we take care of everything else.
 					</p>
-				</motion.div>
-
-				<motion.div
-					className='absolute bottom-8 left-1/2 z-30 flex items-center gap-1 rounded-full bg-white/10 p-1.5 shadow-[0_16px_42px_rgba(0,0,0,0.28)] sm:bottom-8'
-					style={{ opacity: ctaOpacity, x: '-50%' }}
-				>
-					<button className='text-textdark rounded-full bg-white px-6 py-3'>
-						<p className='text-xs leading-none font-bold'>Book the Flight</p>
-					</button>
-					<button
-						aria-label='Open booking form'
-						className='flex size-10 items-center justify-center rounded-full bg-white'
-					>
-						<MdFlightTakeoff className='text-textdark text-2xl' />
-					</button>
 				</motion.div>
 			</div>
 		</section>

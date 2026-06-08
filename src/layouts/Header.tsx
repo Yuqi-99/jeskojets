@@ -1,3 +1,31 @@
+type HeaderLinkProps = {
+	href?: string;
+	label: string;
+	className?: string;
+};
+
+export const FlipText = ({ href, label, className = '' }: HeaderLinkProps) => {
+	return (
+		<>
+			{href ? (
+				<a href={href} aria-label={label} className={`header-flip-link ${className}`}>
+					<span className='header-flip-link__inner' aria-hidden='true'>
+						<span className='header-flip-link__text'>{label}</span>
+						<span className='header-flip-link__text header-flip-link__text--next'>{label}</span>
+					</span>
+				</a>
+			) : (
+				<span aria-label={label} className={`header-flip-link cursor-pointer ${className}`}>
+					<span className='header-flip-link__inner' aria-hidden='true'>
+						<span className='header-flip-link__text'>{label}</span>
+						<span className='header-flip-link__text header-flip-link__text--next'>{label}</span>
+					</span>
+				</span>
+			)}
+		</>
+	);
+};
+
 export const Header = () => {
 	const links = [
 		{ label: 'About', href: '#about' },
@@ -11,26 +39,17 @@ export const Header = () => {
 			<div className='mx-auto flex max-w-640 items-center justify-between gap-3 text-xs font-bold text-white lg:text-sm'>
 				<div className='hidden items-center gap-5 p-1 md:flex'>
 					{links.map((link) => (
-						<a
-							key={link.href}
-							href={link.href}
-							className='rounded-lg p-1 transition hover:bg-white/15'
-						>
-							{link.label}
-						</a>
+						<FlipText key={link.href} href={link.href} label={link.label} />
 					))}
 				</div>
 
 				<div className='flex items-center gap-5 p-1'>
-					<a href='tel:+971544325050' className='rounded-lg p-1 transition hover:bg-white/15'>
-						+971 54 432 5050
-					</a>
-					<a
+					<FlipText label='+971 54 432 5050' />
+					<FlipText
 						href='mailto:info@jeskojets.com'
-						className='hidden rounded-lg p-1 transition hover:bg-white/15 sm:block'
-					>
-						info@jeskojets.com
-					</a>
+						label='info@jeskojets.com'
+						className='hidden sm:inline-flex'
+					/>
 				</div>
 			</div>
 		</header>

@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { Footer } from 'src/layouts/Footer';
 import { Header } from 'src/layouts/Header';
 
 export const RootLayout = () => {
@@ -7,7 +8,7 @@ export const RootLayout = () => {
 			<div className='relative mx-auto flex min-h-screen w-full flex-col items-stretch justify-start overflow-hidden'>
 				<Header />
 				<Outlet />
-				{/* <Footer /> */}
+				<Footer />
 			</div>
 		</main>
 	);
