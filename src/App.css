@@ -171,6 +171,7 @@
 
 html {
 	scroll-behavior: smooth;
+	overflow-x: clip;
 	background: #f4f1ea;
 }
 
@@ -178,6 +179,7 @@ body {
 	min-width: 320px;
 	min-height: 100vh;
 	margin: 0;
+	overflow-x: clip;
 	font-family: var(--font-project);
 	background: #f4f1ea;
 }
@@ -243,6 +245,7 @@ a {
 .header-flip-link__text--next {
 	position: absolute;
 	inset: 0;
+	opacity: 0;
 	transform: translateY(115%) rotateX(-86deg);
 	transform-origin: 50% 0%;
 }

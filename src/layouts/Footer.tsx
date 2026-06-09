@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { MdFlightTakeoff } from 'react-icons/md';
+import { FlipText } from 'src/components/FlipText';
 
 export const Footer = () => {
 	return (
@@ -8,7 +9,7 @@ export const Footer = () => {
 			style={{ x: '-50%' }}
 		>
 			<button className='text-textdark rounded-full bg-white px-6 py-3'>
-				<p className='text-xs leading-none font-bold'>Book the Flight</p>
+				<FlipText label='Book the Flight' className='text-xs font-bold' />
 			</button>
 			<button
 				aria-label='Open booking form'

@@ -36,13 +36,16 @@ export const HomePage = () => {
 	const skyObjectPosition = useTransform(
 		scrollYProgress,
 		[0, 0.64, 1],
-		['50% 0%', '50% 38%', '50% 50%']
+		['50% 0%', '50% 25%', '50% 50%']
 	);
 	const cloudY = useTransform(scrollYProgress, [0, 0.64, 1], [0, -150, -300]);
 	// we are movement text
 	const heroTextOpacity = useTransform(scrollYProgress, [0, 0.34, 0.72], [1, 0.62, 0]);
+	const heroTextVisibility = useTransform(scrollYProgress, (value) =>
+		value >= 0.72 ? 'hidden' : 'visible'
+	);
 	const heroLeftX = useTransform(scrollYProgress, [0, 0.72], ['0vw', '-58vw']);
-	const heroLeftY = useTransform(scrollYProgress, [0, 0.72], ['0vh', '-34vh']);
+	const heroLeftY = useTransform(scrollYProgress, [0, 0.72], ['0vh', '-40vh']);
 	const textScale = useTransform(scrollYProgress, [0, 0.42, 0.72], [1, 1.5]);
 	// we are distinction text
 	const heroRightX = useTransform(scrollYProgress, [0, 0.72], ['0vw', '58vw']);
@@ -75,8 +78,12 @@ export const HomePage = () => {
 	}, []);
 
 	return (
-		<section ref={heroRef} className='relative h-[230vh] bg-[#201b16] text-white'>
-			<div className='fixed top-0 h-screen min-h-170 w-full overflow-hidden sm:min-h-180 lg:min-h-screen'>
+		<section
+			id='top'
+			ref={heroRef}
+			className='relative h-[230vh] overflow-x-clip bg-[#201b16] text-white'
+		>
+			<div className='fixed inset-x-0 top-0 h-dvh min-h-170 overflow-hidden sm:min-h-180 md:min-h-dvh'>
 				<motion.div
 					aria-hidden='true'
 					className='absolute inset-0 z-0 will-change-transform'
@@ -88,7 +95,7 @@ export const HomePage = () => {
 					<motion.img
 						src='/sky.webp'
 						alt=''
-						className='absolute inset-0 h-full w-full object-cover'
+						className='absolute inset-0 h-full w-full origin-top object-cover'
 						style={{ objectPosition: skyObjectPosition }}
 					/>
 
@@ -112,7 +119,7 @@ export const HomePage = () => {
 						x: '-50%',
 						y: '-50%',
 						scale: windowScale,
-						transformOrigin: '50% 47.4%',
+						transformOrigin: '50% 50%',
 					}}
 				>
 					<motion.div
@@ -141,7 +148,7 @@ export const HomePage = () => {
 				</motion.div>
 
 				<motion.div
-					className='absolute left-1/2 z-4 w-full -translate-x-1/2 -translate-y-1/2 text-center text-[2.25rem] leading-none font-normal tracking-tight text-white/95 sm:text-[2rem]'
+					className='absolute left-1/2 z-4 w-full -translate-x-1/2 -translate-y-1/2 text-center text-xl leading-none font-normal tracking-tight text-white/95 md:text-3xl'
 					style={{ opacity: jeskoJetsOpacity, scale: jeskoJetsScale, top: jeskoJetsTop }}
 				>
 					Jesko Jets
@@ -151,6 +158,7 @@ export const HomePage = () => {
 					className='absolute top-[20%] left-[10%] z-20 max-w-[min(45rem,86vw)] text-[3rem] leading-[0.9] font-medium tracking-[-0.08em] text-white sm:left-[6.55%] sm:text-[4rem] md:text-[clamp(4.5rem,5vw,6.75rem)] md:leading-[0.9] lg:top-[17.5%] lg:leading-[0.88889]'
 					style={{
 						opacity: heroTextOpacity,
+						visibility: heroTextVisibility,
 						x: heroLeftX,
 						y: heroLeftY,
 						scale: textScale,
@@ -167,6 +175,7 @@ export const HomePage = () => {
 						className='max-w-[min(45rem,86vw)] text-right text-[2.75rem] leading-[0.9] font-medium tracking-[-0.08em] text-white sm:text-[4rem] md:text-[clamp(4.5rem,5vw,6.75rem)] md:leading-[0.9] lg:leading-[0.88889]'
 						style={{
 							opacity: heroTextOpacity,
+							visibility: heroTextVisibility,
 							x: heroRightX,
 							y: heroRightY,
 							scale: textScale,
@@ -180,13 +189,19 @@ export const HomePage = () => {
 
 					<motion.div
 						className='mt-10 hidden h-px w-2/3 bg-white lg:flex'
-						style={{ opacity: heroTextOpacity, x: heroScrollX, y: heroScrollY }}
+						style={{
+							opacity: heroTextOpacity,
+							visibility: heroTextVisibility,
+							x: heroScrollX,
+							y: heroScrollY,
+						}}
 					/>
 
 					<motion.div
 						className='hidden w-full items-center justify-between text-[clamp(8px,0.694vw,10px)] leading-[1.2] font-bold tracking-[-0.032em] uppercase lg:flex'
 						style={{
 							opacity: heroTextOpacity,
+							visibility: heroTextVisibility,
 							x: heroScrollX,
 							y: heroScrollY,
 							scale: textScale,
@@ -205,6 +220,7 @@ export const HomePage = () => {
 					className='absolute bottom-[20%] left-[6.65%] z-20 hidden w-70 lg:bottom-20 lg:block xl:w-120'
 					style={{
 						opacity: heroTextOpacity,
+						visibility: heroTextVisibility,
 						x: heroCopyX,
 						y: heroCopyY,
 						scale: textScale,
