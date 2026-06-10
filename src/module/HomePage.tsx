@@ -40,18 +40,18 @@ export const HomePage = () => {
 	const windowOpacity = useTransform(scrollYProgress, [0, 0.74, 0.96], [1, 1, 0]);
 	const skyScale = useTransform(scrollYProgress, [0, 0.64, 1], [1.5, 1.16, 1]);
 	const heroSkyY = useTransform(scrollYProgress, [0, 0.64, 1], [0, -12.5, -25]);
-	const aboutSkyY = useTransform(aboutScrollYProgress, [0, 0.38, 1], [0, -75, -75]);
+	const aboutSkyY = useTransform(aboutScrollYProgress, [0, 0.4, 1], [0, -75, -75]);
 	const skyY = useTransform(
 		[heroSkyY, aboutSkyY],
 		([heroPosition, aboutPosition]) => `${Number(heroPosition) + Number(aboutPosition)}%`
 	);
 	const heroCloudY = useTransform(scrollYProgress, [0, 0.64, 1], [0, -150, -300]);
-	const aboutCloudY = useTransform(aboutScrollYProgress, [0, 0.38, 1], [0, -500, -500]);
+	const aboutCloudY = useTransform(aboutScrollYProgress, [0, 0.4, 1], [0, -500, -500]);
 	const cloudY = useTransform(
 		[heroCloudY, aboutCloudY],
 		([heroPosition, aboutPosition]) => Number(heroPosition) + Number(aboutPosition)
 	);
-	const cloudOpacity = useTransform(aboutScrollYProgress, [0, 0.3, 0.38], [0.7, 0.18, 0]);
+	const cloudOpacity = useTransform(aboutScrollYProgress, [0, 0.5, 0.8], [0.7, 0.18, 0]);
 	// we are movement text
 	const heroTextOpacity = useTransform(scrollYProgress, [0, 0.34, 0.72], [1, 0.62, 0]);
 	const heroTextVisibility = useTransform(scrollYProgress, (value) =>
