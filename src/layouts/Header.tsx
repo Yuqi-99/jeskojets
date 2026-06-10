@@ -27,7 +27,7 @@ export const Header = () => {
 	}, []);
 
 	return (
-		<header className='fixed inset-x-0 top-0 z-50 px-4 py-4 sm:px-6 lg:px-16'>
+		<header className='z-header fixed inset-x-0 top-0 px-4 py-4 sm:px-6 lg:px-16'>
 			<div className='mx-auto flex max-w-640 items-center justify-between gap-3 text-xs font-bold text-white lg:text-sm'>
 				<div className='hidden items-center gap-5 p-1 md:flex'>
 					{links.map((link) => (
