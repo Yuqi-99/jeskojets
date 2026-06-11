@@ -90,6 +90,19 @@ export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 			'calc(-50% - 4vh)',
 		]
 	);
+	const revealBoundary = useTransform(scrollYProgress, [0, 0.84, 1], [112, 112, -16]);
+
+	const airplaneMask = useTransform(
+		revealBoundary,
+		(value) =>
+			`linear-gradient(to bottom, #000 0%, #000 ${value - 14}%, rgba(0,0,0,0.82) ${value - 8}%, rgba(0,0,0,0.48) ${value}%, rgba(0,0,0,0.16) ${value + 8}%, transparent ${value + 14}%, transparent 100%)`
+	);
+	const wireframeMask = useTransform(
+		revealBoundary,
+		(value) =>
+			`linear-gradient(to bottom, transparent 0%, transparent ${value - 14}%, rgba(0,0,0,0.16) ${value - 8}%, rgba(0,0,0,0.48) ${value}%, rgba(0,0,0,0.82) ${value + 8}%, #000 ${value + 14}%, #000 100%)`
+	);
+	const wireframeOpacity = useTransform(scrollYProgress, [0, 0.835, 0.85, 1], [0, 0, 1, 1]);
 
 	return (
 		<section
@@ -171,7 +184,7 @@ export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 
 					{/* Gulfstream spec — bottom right */}
 					<motion.div
-						className='w-full max-w-[19rem] self-end lg:max-w-[25rem]'
+						className='w-full max-w-76 self-end lg:max-w-100'
 						style={prefersReducedMotion ? {} : { y: titleY, opacity: titleOpacity }}
 					>
 						<div className='mb-[0.9em] flex items-baseline justify-between border-b border-[#1d1b18]/20 pb-[0.6em]'>
@@ -182,7 +195,7 @@ export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 								650ER
 							</span>
 						</div>
-						<p className='text-[9.5px] leading-[1.6] font-bold tracking-tight lg:text-[11px]'>
+						<p className='text-[10px] leading-[1.6] font-bold tracking-tight lg:text-[11px]'>
 							Featuring wings designed to minimize anything that could disrupt its natural
 							aerodynamic balance, and powered by high-thrust Rolls-Royce BR725 AI-12 engines, the
 							Gulfstream G650 is engineered for exceptional range and top-end speed.
@@ -211,10 +224,10 @@ export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 							<div className='grid grid-cols-2 gap-x-4 gap-y-2 border-t border-[#1d1b18]/15 pt-3'>
 								{aircraftStats.map(([label, value]) => (
 									<div key={label}>
-										<div className='text-[7px] leading-tight font-bold text-[#1d1b18]/35 uppercase'>
+										<div className='text-[8px] leading-tight font-bold text-[#1d1b18]/35 uppercase'>
 											{label}
 										</div>
-										<div className='mt-0.5 text-[7px] leading-[1.08] font-bold uppercase'>
+										<div className='mt-0.5 text-[8px] leading-[1.08] font-bold uppercase'>
 											{value}
 										</div>
 									</div>
@@ -223,14 +236,14 @@ export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 
 							<div className='mt-3 grid grid-cols-2 gap-4 border-t border-[#1d1b18]/15 pt-3'>
 								<div>
-									<div className='text-[7px] font-bold text-[#1d1b18]/35 uppercase'>
+									<div className='text-[8px] font-bold text-[#1d1b18]/35 uppercase'>
 										Specification
 									</div>
 									<div className='mt-2 grid gap-1'>
 										{aircraftSpecifications.map(([label, value]) => (
 											<div
 												key={label}
-												className='grid grid-cols-[1fr_auto] gap-2 text-[7px] leading-none font-bold uppercase'
+												className='grid grid-cols-[1fr_auto] gap-2 text-[8px] leading-none font-bold uppercase'
 											>
 												<span>{label}</span>
 												<span>{value}</span>
@@ -240,10 +253,10 @@ export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 								</div>
 
 								<div>
-									<h3 className='text-[7px] leading-none font-bold uppercase'>
+									<h3 className='text-[8px] leading-none font-bold uppercase'>
 										Direct Access to Private Travel
 									</h3>
-									<p className='mt-2 text-[8px] leading-[1.25] font-medium'>
+									<p className='mt-2 text-[8px] leading-tight font-medium'>
 										A true time-saving machine, it brings Tokyo and New York an hour closer, and at
 										92% of the speed of sound, it can circle the globe with just a single stop.
 									</p>
@@ -270,7 +283,7 @@ export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 											<div className='text-[8px] leading-tight font-bold text-[#1d1b18]/32 uppercase lg:text-[9px]'>
 												{label}
 											</div>
-											<div className='mt-0.5 max-w-40 text-[8px] leading-[1.08] font-bold uppercase lg:text-[9px]'>
+											<div className='mt-0.5 max-w-40 text-[10px] leading-[1.08] font-bold uppercase lg:text-[9px]'>
 												{value}
 											</div>
 										</div>
@@ -321,40 +334,82 @@ export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 				</motion.div>
 
 				<motion.img
-					src='/airplane.webp'
-					alt='Gulfstream 650ER viewed from above'
-					className='pointer-events-none absolute top-0 left-1/2 z-20 hidden w-[96vw] max-w-[1250px] object-contain will-change-transform md:block'
+					src='/airplane-wireframe.avif'
+					alt='Gulfstream 650ER cabin blueprint'
+					className='pointer-events-none absolute top-1/2 left-1/2 z-19 h-auto w-[62vw] max-w-105 object-contain mix-blend-multiply will-change-transform md:w-[30vw] md:max-w-107.5'
 					style={
 						prefersReducedMotion
-							? { opacity: 1, scale: 0.5, top: '50%', x: '-50%', y: '-50%' }
-							: {
-									opacity: planeOpacity,
-									scale: planeScale,
-									top: desktopPlaneTop,
+							? {
+									opacity: 1,
 									x: '-50%',
-									y: desktopPlaneY,
-									transformOrigin: '50% 50%',
+									y: '-50%',
+								}
+							: {
+									opacity: wireframeOpacity,
+									x: '-50%',
+									y: '-65%',
+									WebkitMaskImage: wireframeMask,
+									maskImage: wireframeMask,
+									WebkitMaskRepeat: 'no-repeat',
+									maskRepeat: 'no-repeat',
 								}
 					}
 				/>
 
-				<motion.img
-					src='/airplane.webp'
-					alt=''
-					aria-hidden='true'
-					className='pointer-events-none absolute top-1/2 left-1/2 z-20 w-[155vw] max-w-none object-contain will-change-transform sm:w-[112vw] md:hidden'
+				<motion.div
+					className='pointer-events-none absolute inset-0 z-20 hidden md:block'
 					style={
 						prefersReducedMotion
-							? { opacity: 1, scale: 0.4, x: '-50%', y: '-50%' }
+							? { visibility: 'hidden' }
 							: {
-									opacity: planeOpacity,
-									scale: mobilePlaneScale,
-									x: '-50%',
-									y: mobilePlaneY,
-									transformOrigin: '50% 50%',
+									WebkitMaskImage: airplaneMask,
+									maskImage: airplaneMask,
+									WebkitMaskRepeat: 'no-repeat',
+									maskRepeat: 'no-repeat',
 								}
 					}
-				/>
+				>
+					<motion.img
+						src='/airplane.webp'
+						alt='Gulfstream 650ER viewed from above'
+						className='absolute top-0 left-1/2 w-[96vw] max-w-312.5 object-contain will-change-transform'
+						style={{
+							opacity: planeOpacity,
+							scale: planeScale,
+							top: desktopPlaneTop,
+							x: '-50%',
+							y: desktopPlaneY,
+							transformOrigin: '50% 50%',
+						}}
+					/>
+				</motion.div>
+
+				<motion.div
+					className='pointer-events-none absolute inset-0 z-20 md:hidden'
+					style={
+						prefersReducedMotion
+							? { visibility: 'hidden' }
+							: {
+									WebkitMaskImage: airplaneMask,
+									maskImage: airplaneMask,
+									WebkitMaskRepeat: 'no-repeat',
+									maskRepeat: 'no-repeat',
+								}
+					}
+				>
+					<motion.img
+						src='/airplane.webp'
+						alt='Gulfstream 650ER viewed from above'
+						className='absolute top-1/2 left-1/2 w-[155vw] max-w-none object-contain will-change-transform sm:w-[112vw]'
+						style={{
+							opacity: planeOpacity,
+							scale: mobilePlaneScale,
+							x: '-50%',
+							y: mobilePlaneY,
+							transformOrigin: '50% 50%',
+						}}
+					/>
+				</motion.div>
 			</div>
 		</section>
 	);
