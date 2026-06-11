@@ -34,8 +34,8 @@ type RevealCharProps = {
 };
 
 const RevealChar = ({ progress, index, total, children }: RevealCharProps) => {
-	const start = 0.02 + (index / total) * 0.17;
-	const end = start + 0.035;
+	const start = 0.02 + (index / total) * 0.25;
+	const end = start + 0.001;
 	const color = useTransform(
 		progress,
 		[start, end],
@@ -65,7 +65,7 @@ export const AboutSection = ({ sectionRef }: AboutSectionProps) => {
 		<section
 			id='about'
 			ref={sectionRef}
-			className='relative z-2 -mt-[100vh] h-[350vh] bg-transparent bg-[url("/cloud-2.avif")] text-white'
+			className='relative z-2 mt-[-100vh] h-[250vh] bg-transparent bg-[url("/cloud-2.avif")] bg-cover bg-center bg-no-repeat text-white'
 		>
 			<div className='sticky top-0 flex h-dvh min-h-170 flex-col overflow-hidden px-[6.55vw] pt-28 pb-24 sm:min-h-180 lg:pt-[34vh] lg:pb-20'>
 				<motion.div

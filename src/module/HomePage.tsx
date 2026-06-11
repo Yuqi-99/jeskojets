@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { AboutSection } from 'src/module/AboutSection';
+import { LuxurySection } from 'src/module/LuxurySection';
 
 const heroDesign = {
 	width: 2560,
@@ -26,6 +27,7 @@ const getViewportHeight = () => {
 export const HomePage = () => {
 	const heroRef = useRef<HTMLElement>(null);
 	const aboutRef = useRef<HTMLElement>(null);
+	const luxuryRef = useRef<HTMLElement>(null);
 	const [heroScale, setHeroScale] = useState(getHeroScale);
 	const [viewportHeight, setViewportHeight] = useState(getViewportHeight);
 	const { scrollYProgress } = useScroll({
@@ -254,6 +256,7 @@ export const HomePage = () => {
 				</div>
 			</section>
 			<AboutSection sectionRef={aboutRef} />
+			<LuxurySection sectionRef={luxuryRef} />
 		</>
 	);
 };
