@@ -55,9 +55,9 @@ export const AboutSection = ({ sectionRef }: AboutSectionProps) => {
 		target: sectionRef,
 		offset: ['start start', 'end end'],
 	});
-	const containerY = useTransform(scrollYProgress, [0.1, 0.4, 1], ['0px', '-50vh', '-200vh']);
+	const containerY = useTransform(scrollYProgress, [0.2, 0.5, 1], ['10px', '-50vh', '-200vh']);
 	const containerOpacity = useTransform(scrollYProgress, [0, 0.05, 1], [0, 1, 1]);
-	const detailsY = useTransform(scrollYProgress, [0.15, 0.4], ['100vh', '0px']);
+	const detailsY = useTransform(scrollYProgress, [0.25, 0.5], ['100vh', '0px']);
 	const detailsOpacity = useTransform(scrollYProgress, [0, 0.3, 1], [0, 1, 1]);
 	const chars = aboutCopy.split('');
 

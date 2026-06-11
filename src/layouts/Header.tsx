@@ -29,7 +29,7 @@ export const Header = () => {
 	return (
 		<header className='z-header fixed inset-x-0 top-0 px-4 py-4 sm:px-6 lg:px-16'>
 			<div className='mx-auto flex max-w-640 items-center justify-between gap-3 text-xs font-bold text-white lg:text-sm'>
-				<div className='hidden items-center gap-5 p-1 md:flex'>
+				<div className='hidden items-center gap-1 p-1 md:flex lg:gap-5'>
 					{links.map((link) => (
 						<FlipText key={link.href} href={link.href} label={link.label} />
 					))}
@@ -37,7 +37,7 @@ export const Header = () => {
 
 				<a href='#top' className='rounded-lg p-1 text-sm font-medium md:hidden'></a>
 
-				<div className='hidden items-center gap-5 p-1 md:flex'>
+				<div className='hidden items-center gap-1 p-1 md:flex lg:gap-5'>
 					<FlipText label='+971 54 432 5050' />
 					<FlipText href='mailto:info@jeskojets.com' label='info@jeskojets.com' />
 				</div>

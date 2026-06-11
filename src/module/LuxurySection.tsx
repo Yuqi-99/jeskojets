@@ -5,6 +5,21 @@ type LuxurySectionProps = {
 	sectionRef: RefObject<HTMLElement | null>;
 };
 
+const aircraftStats = [
+	['Maximum operating range', '11,263 km'],
+	['Speed', '480 knots'],
+	['Passenger capacity', 'Up to 12 seats (+1 cabin server)'],
+	['Endurance', '14 hrs (maximum for European based aircraft)'],
+	['Baggage capacity', '5.52 m3'],
+	['Cruising altitude', '15,544 m'],
+];
+
+const aircraftSpecifications = [
+	['Cabin length', '14.05 m²'],
+	['Cabin width', '2.49 m²'],
+	['Cabin height', '1.92 m²'],
+];
+
 export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 	const prefersReducedMotion = useReducedMotion();
 
@@ -13,26 +28,68 @@ export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 		offset: ['start start', 'end end'],
 	});
 
-	const atmosphereOpacity = useTransform(scrollYProgress, [0, 0.18, 1], [0, 1, 1]);
+	// The first 60% keeps the exact physical duration of the existing 400vh scene.
+	// The remaining scroll continues into the aircraft specification scene.
+	const atmosphereOpacity = useTransform(scrollYProgress, [0, 0.108, 1], [0, 1, 1]);
 	const atmosphereY = useTransform(
 		scrollYProgress,
-		[0, 0.18, 0.82, 1],
-		['0vh', '0vh', '-112vh', '-120vh']
+		[0, 0.108, 0.492, 0.6, 1],
+		['0vh', '0vh', '-112vh', '-120vh', '-120vh']
 	);
 	const transitionVisibility = useTransform(
 		scrollYProgress,
-		[0, 0.12, 0.24, 1],
+		[0, 0.072, 0.144, 1],
 		['visible', 'visible', 'hidden', 'hidden']
 	);
 
-	const titleY = useTransform(scrollYProgress, [0, 0.2, 1], ['75vh', '12vh', '12vh']);
-	const titleOpacity = useTransform(scrollYProgress, [0, 0.16, 1], [0, 1, 1]);
-	const planeY = useTransform(
+	const titleY = useTransform(scrollYProgress, [0, 0.12, 1], ['75vh', '12vh', '12vh']);
+	const titleOpacity = useTransform(scrollYProgress, [0, 0.096, 1], [0, 1, 1]);
+	const titleSceneY = useTransform(
 		scrollYProgress,
-		[0, 0.28, 0.44, 0.64, 0.86, 1],
-		['118vh', '118vh', '58vh', '8vh', '-7vh', '-14vh']
+		[0, 0.6, 0.84, 1],
+		['0vh', '0vh', '112vh', '112vh']
 	);
-	const planeOpacity = useTransform(scrollYProgress, [0, 0.28, 0.3, 1], [0, 0, 1, 1]);
+	const specificationSceneY = useTransform(
+		scrollYProgress,
+		[0, 0.6, 0.84, 1],
+		['-105vh', '-105vh', '0vh', '0vh']
+	);
+	const desktopPlaneTop = useTransform(
+		scrollYProgress,
+		[0, 0.6, 0.84, 1],
+		['0%', '0%', '50%', '50%']
+	);
+	const desktopPlaneY = useTransform(
+		scrollYProgress,
+		[0, 0.168, 0.264, 0.384, 0.516, 0.6, 0.84, 1],
+		[
+			'calc(0% + 118vh)',
+			'calc(0% + 118vh)',
+			'calc(0% + 58vh)',
+			'calc(0% + 8vh)',
+			'calc(-50% + 14vh)',
+			'calc(-50% + 7vh)',
+			'calc(-50% + 0vh)',
+			'calc(-50% + 0vh)',
+		]
+	);
+	const planeScale = useTransform(scrollYProgress, [0, 0.6, 0.84, 1], [1, 1, 0.5, 0.5]);
+	const planeOpacity = useTransform(scrollYProgress, [0, 0.168, 0.18, 1], [0, 0, 1, 1]);
+	const mobilePlaneScale = useTransform(scrollYProgress, [0, 0.6, 0.84, 1], [1, 1, 0.4, 0.4]);
+	const mobilePlaneY = useTransform(
+		scrollYProgress,
+		[0, 0.168, 0.264, 0.384, 0.516, 0.6, 0.84, 1],
+		[
+			'calc(-50% + 118vh)',
+			'calc(-50% + 118vh)',
+			'calc(-50% + 58vh)',
+			'calc(-50% + 8vh)',
+			'calc(-50% + 0vh)',
+			'calc(-50% - 2vh)',
+			'calc(-50% - 4vh)',
+			'calc(-50% - 4vh)',
+		]
+	);
 
 	return (
 		<section
@@ -41,7 +98,7 @@ export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 			// mt-[-140vh]: overlaps with AboutSection's last 140vh so the transition
 			// begins while cloud-2.avif is still in view.
 			// z-20: sits above AboutSection (z-2) and hero (z-0).
-			className='relative z-5 mt-[-140vh] h-[400vh] w-full text-[#1d1b18]'
+			className='relative z-5 mt-[-140vh] h-[600vh] w-full text-[#1d1b18]'
 		>
 			<div className='sticky top-0 h-screen w-full overflow-hidden'>
 				{/* ── LAYER A: Always-present bottom gradient  一开始的蓝色渐变  ── */}
@@ -76,7 +133,10 @@ export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 				/>
 
 				{/* ── CONTENT ── */}
-				<div className='absolute inset-0 z-10 flex flex-col justify-around bg-transparent px-[6.55vw] pt-[18vh] pb-[6vh] lg:pt-[22vh] lg:pb-[8vh]'>
+				<motion.div
+					className='absolute inset-0 z-10 flex flex-col justify-around bg-transparent px-[6.55vw] pt-[18vh] pb-[6vh] will-change-transform lg:pt-[22vh] lg:pb-[8vh]'
+					style={prefersReducedMotion ? { y: '112vh' } : { y: titleSceneY }}
+				>
 					{/* Headline row */}
 					<div className='flex w-full items-start justify-between'>
 						{/* Left: "Fly in" + subtitle stacked */}
@@ -128,16 +188,171 @@ export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 							Gulfstream G650 is engineered for exceptional range and top-end speed.
 						</p>
 					</motion.div>
-				</div>
+				</motion.div>
+
+				{/* second section */}
+				<motion.div
+					className='absolute inset-0 z-15 px-[6.55vw] pt-[11vh] pb-[11vh] will-change-transform md:pb-[5vh]'
+					style={prefersReducedMotion ? { y: 0 } : { y: specificationSceneY }}
+				>
+					<div className='flex h-full flex-col md:hidden'>
+						<div className='shrink-0'>
+							<div className='border-t border-[#1d1b18]/15 pt-2 text-sm font-medium'>
+								Gulfstream
+							</div>
+							<div className='mt-1 text-[clamp(3.25rem,15vw,6rem)] leading-[0.82] font-medium tracking-[-0.065em]'>
+								650ER
+							</div>
+						</div>
+
+						<div className='min-h-0 flex-1' aria-hidden='true' />
+
+						<div className='shrink-0'>
+							<div className='grid grid-cols-2 gap-x-4 gap-y-2 border-t border-[#1d1b18]/15 pt-3'>
+								{aircraftStats.map(([label, value]) => (
+									<div key={label}>
+										<div className='text-[7px] leading-tight font-bold text-[#1d1b18]/35 uppercase'>
+											{label}
+										</div>
+										<div className='mt-0.5 text-[7px] leading-[1.08] font-bold uppercase'>
+											{value}
+										</div>
+									</div>
+								))}
+							</div>
+
+							<div className='mt-3 grid grid-cols-2 gap-4 border-t border-[#1d1b18]/15 pt-3'>
+								<div>
+									<div className='text-[7px] font-bold text-[#1d1b18]/35 uppercase'>
+										Specification
+									</div>
+									<div className='mt-2 grid gap-1'>
+										{aircraftSpecifications.map(([label, value]) => (
+											<div
+												key={label}
+												className='grid grid-cols-[1fr_auto] gap-2 text-[7px] leading-none font-bold uppercase'
+											>
+												<span>{label}</span>
+												<span>{value}</span>
+											</div>
+										))}
+									</div>
+								</div>
+
+								<div>
+									<h3 className='text-[7px] leading-none font-bold uppercase'>
+										Direct Access to Private Travel
+									</h3>
+									<p className='mt-2 text-[8px] leading-[1.25] font-medium'>
+										A true time-saving machine, it brings Tokyo and New York an hour closer, and at
+										92% of the speed of sound, it can circle the globe with just a single stop.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div className='hidden h-full grid-cols-[1fr_1.15fr_1fr] gap-10 md:grid'>
+						<div className='flex min-h-0 flex-col justify-between'>
+							<div>
+								<div className='border-t border-[#1d1b18]/15 pt-3 text-[clamp(1rem,1.65vw,1.5rem)] font-medium'>
+									Gulfstream
+								</div>
+								<div className='mt-3 text-[clamp(4rem,7.5vw,7.5rem)] leading-[0.8] font-medium tracking-[-0.065em]'>
+									650ER
+								</div>
+							</div>
+
+							<div>
+								<div className='grid grid-cols-2 gap-x-5 gap-y-5 border-t border-[#1d1b18]/15 pt-4'>
+									{aircraftStats.map(([label, value]) => (
+										<div key={label}>
+											<div className='text-[8px] leading-tight font-bold text-[#1d1b18]/32 uppercase lg:text-[9px]'>
+												{label}
+											</div>
+											<div className='mt-0.5 max-w-40 text-[8px] leading-[1.08] font-bold uppercase lg:text-[9px]'>
+												{value}
+											</div>
+										</div>
+									))}
+								</div>
+
+								<div className='mt-5 border-t border-[#1d1b18]/15 pt-4'>
+									<div className='text-[8px] font-bold text-[#1d1b18]/32 uppercase lg:text-[9px]'>
+										Specification
+									</div>
+									<div className='mt-3 grid gap-1'>
+										{aircraftSpecifications.map(([label, value]) => (
+											<div
+												key={label}
+												className='grid grid-cols-[1fr_auto] text-[8px] leading-none font-bold uppercase lg:text-[9px]'
+											>
+												<span>{label}</span>
+												<span>{value}</span>
+											</div>
+										))}
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div className='hidden md:block' aria-hidden='true' />
+
+						<div className='flex min-h-0 flex-col'>
+							<div className='border-t border-[#1d1b18]/15 pt-3 text-[clamp(1rem,1.65vw,1.5rem)] leading-[0.95] font-medium tracking-[-0.04em]'>
+								Ultra-long-range
+								<br />
+								Aircraft
+							</div>
+
+							<div className='mt-[12vh] border-t border-[#1d1b18]/15 pt-4'>
+								<h3 className='text-[8px] leading-none font-bold uppercase lg:text-[9px]'>
+									Direct Access to
+									<br />
+									Private Travel
+								</h3>
+								<p className='mt-8 max-w-72 text-[10px] leading-[1.35] font-medium lg:text-[11px]'>
+									A true time-saving machine, it brings Tokyo and New York an hour closer, and at
+									92% of the speed of sound, it can circle the globe with just a single stop.
+								</p>
+							</div>
+						</div>
+					</div>
+				</motion.div>
 
 				<motion.img
 					src='/airplane.webp'
 					alt='Gulfstream 650ER viewed from above'
-					className='pointer-events-none absolute top-0 left-1/2 z-20 w-[155vw] max-w-none object-contain will-change-transform sm:w-[112vw] md:w-[96vw] md:max-w-[1250px]'
+					className='pointer-events-none absolute top-0 left-1/2 z-20 hidden w-[96vw] max-w-[1250px] object-contain will-change-transform md:block'
 					style={
 						prefersReducedMotion
-							? { opacity: 1, x: '-50%', y: '4vh' }
-							: { opacity: planeOpacity, x: '-50%', y: planeY }
+							? { opacity: 1, scale: 0.5, top: '50%', x: '-50%', y: '-50%' }
+							: {
+									opacity: planeOpacity,
+									scale: planeScale,
+									top: desktopPlaneTop,
+									x: '-50%',
+									y: desktopPlaneY,
+									transformOrigin: '50% 50%',
+								}
+					}
+				/>
+
+				<motion.img
+					src='/airplane.webp'
+					alt=''
+					aria-hidden='true'
+					className='pointer-events-none absolute top-1/2 left-1/2 z-20 w-[155vw] max-w-none object-contain will-change-transform sm:w-[112vw] md:hidden'
+					style={
+						prefersReducedMotion
+							? { opacity: 1, scale: 0.4, x: '-50%', y: '-50%' }
+							: {
+									opacity: planeOpacity,
+									scale: mobilePlaneScale,
+									x: '-50%',
+									y: mobilePlaneY,
+									transformOrigin: '50% 50%',
+								}
 					}
 				/>
 			</div>
