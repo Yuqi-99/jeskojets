@@ -347,7 +347,7 @@ export const LuxurySection = ({ sectionRef }: LuxurySectionProps) => {
 							: {
 									opacity: wireframeOpacity,
 									x: '-50%',
-									y: '-65%',
+									y: '-63%',
 									WebkitMaskImage: wireframeMask,
 									maskImage: wireframeMask,
 									WebkitMaskRepeat: 'no-repeat',
