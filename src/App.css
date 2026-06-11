@@ -292,7 +292,7 @@ a {
 	mask-image: linear-gradient(90deg, transparent 0%, black 18%, black 82%, transparent 100%);
 }
 
-.luxury-atmosphere {
+/* .luxury-atmosphere {
 	background: linear-gradient(
 		to bottom,
 		#83b6d6 0%,
@@ -302,7 +302,7 @@ a {
 		#ecebe3 82%,
 		#f4f1ea 100%
 	);
-}
+} */
 
 @keyframes hero-cloud-drift {
 	from {
