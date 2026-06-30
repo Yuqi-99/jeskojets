@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { AboutSection } from 'src/module/AboutSection';
 import { LuxurySection } from 'src/module/LuxurySection';
+import { PetsSection } from 'src/module/PetsSection';
 
 const heroDesign = {
 	width: 2560,
@@ -257,6 +258,7 @@ export const HomePage = () => {
 			</section>
 			<AboutSection sectionRef={aboutRef} />
 			<LuxurySection sectionRef={luxuryRef} />
+			<PetsSection />
 		</>
 	);
 };
