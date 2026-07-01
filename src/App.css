@@ -249,6 +249,15 @@ a {
 	box-shadow: 0 0 0 2px rgb(255 255 255 / 0.45);
 }
 
+.header-tone-dark .header-flip-link:hover,
+.header-tone-dark .header-flip-link:focus-visible {
+	background: rgb(0 0 0 / 0.08);
+}
+
+.header-tone-dark .header-flip-link:focus-visible {
+	box-shadow: 0 0 0 2px rgb(0 0 0 / 0.2);
+}
+
 .header-flip-link__inner {
 	position: relative;
 	display: block;
