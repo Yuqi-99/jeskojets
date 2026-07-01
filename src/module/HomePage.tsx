@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { AboutSection } from 'src/module/AboutSection';
+import { GlobalFooterSection } from 'src/module/GlobalFooterSection';
 import { LuxurySection } from 'src/module/LuxurySection';
 import { PetsSection } from 'src/module/PetsSection';
 
@@ -259,6 +260,7 @@ export const HomePage = () => {
 			<AboutSection sectionRef={aboutRef} />
 			<LuxurySection sectionRef={luxuryRef} />
 			<PetsSection />
+			<GlobalFooterSection />
 		</>
 	);
 };

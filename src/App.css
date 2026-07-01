@@ -207,6 +207,25 @@ a {
 	background: #1d1b18;
 }
 
+.global-city-window {
+	-webkit-mask-image: linear-gradient(to bottom, transparent, #000 23%, #000 76%, transparent);
+	mask-image: linear-gradient(to bottom, transparent, #000 23%, #000 76%, transparent);
+}
+
+.global-barcode {
+	background: repeating-linear-gradient(
+		90deg,
+		#211918 0,
+		#211918 1px,
+		transparent 1px,
+		transparent 2px,
+		#211918 2px,
+		#211918 4px,
+		transparent 4px,
+		transparent 5px
+	);
+}
+
 .header-flip-link {
 	position: relative;
 	display: inline-flex;
