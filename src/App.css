@@ -174,7 +174,8 @@
 html {
 	scroll-behavior: smooth;
 	overflow-x: clip;
-	background: #f4f1ea;
+	overscroll-behavior-y: none;
+	background: #211918;
 }
 
 body {
@@ -182,6 +183,7 @@ body {
 	min-height: 100vh;
 	margin: 0;
 	overflow-x: clip;
+	overscroll-behavior-y: none;
 	font-family: var(--font-project);
 	background: #f4f1ea;
 }
