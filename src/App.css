@@ -188,6 +188,11 @@ body {
 	background: #f4f1ea;
 }
 
+body.is-loading {
+	overflow: hidden;
+	background: #211918;
+}
+
 button,
 a,
 input {

@@ -5,6 +5,7 @@ import {
 	RouterProvider,
 } from 'react-router-dom';
 import 'src/App.css';
+import { LoadingScreen } from 'src/components/LoadingScreen';
 import { RootLayout } from 'src/layouts/RootLayout';
 import { HomePage } from 'src/module/HomePage';
 import { NotFoundPage } from 'src/module/NotFoundPage';
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
 export const App = () => {
 	return (
 		<>
+			<LoadingScreen />
 			<RouterProvider router={router} />
 		</>
 	);
